@@ -24,7 +24,7 @@ import PageFooter from '@/components/PageFooter.vue';
 
 <style>
 html, body {
-  background: #f4f5f5;
+  background: #ededed;
   height: 100%;
 }
 </style>

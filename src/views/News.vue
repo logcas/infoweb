@@ -73,8 +73,7 @@ export default {
 
 <style lang="scss" scoped>
 .news-wrapper {
-  padding: 10px;
-  padding-top: 0;
+  padding-bottom: 10px;
   background: #fff;
 }
 
@@ -87,7 +86,7 @@ export default {
   user-select: none;
 
   &.active {
-    color: #1890ff;
+    color: #5079d9;
   }
 
   &_item {
@@ -98,7 +97,7 @@ export default {
 
     &:hover,
     &.active {
-      color: #1890ff;
+      color: #5079d9;
     }
   }
 
@@ -123,6 +122,7 @@ export default {
   .news-item {
     padding: 20px 15px;
     font-size: 16px;
+    border-bottom: 1px solid hsla(0, 0%, 59.2%, 0.1);
 
     &:hover {
       background: rgba($color: #000000, $alpha: 0.01);
@@ -142,7 +142,7 @@ export default {
       color: #909090;
 
       &:hover {
-        color: #1890ff;
+        color: #5079d9;
       }
     }
 
@@ -151,10 +151,6 @@ export default {
       font-size: 12px;
       color: #909090;
     }
-  }
-
-  .news-item + .news-item {
-    border-top: 1px solid hsla(0, 0%, 59.2%, 0.1);
   }
 }
 
@@ -171,7 +167,7 @@ export default {
     cursor: pointer;
 
     &:hover {
-      color: #1890ff;
+      color: #5079d9;
     }
   }
 }

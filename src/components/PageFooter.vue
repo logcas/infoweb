@@ -13,8 +13,9 @@
   width: 100%;
   line-height: 120px;
   font-size: 14px;
-  color: #909090;
+  color: #666;
   text-align: center;
-  background: #fff;
+  background: #fafafa;
+  border-top: 1px solid #e6e6e6;
 }
 </style>

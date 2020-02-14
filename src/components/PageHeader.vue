@@ -30,12 +30,13 @@ export default {
   width: 100%;
   height: 63px;
   background: #fff;
-  box-shadow: 0 2px 8px #f0f1f2;
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,.05);
+  border-bottom: 1px solid #e1e1e1;
   z-index: 10;
 
   .page-name {
     float: left;
-    color: #1890ff;
+    color: #5079d9;
     font-size: 30px;
     height: 63px;
     line-height: 63px;
@@ -50,18 +51,16 @@ export default {
     &_item {
       float: left;
       padding: 0 20px;
-      font-size: 16px;
+      font-size: 14px;
       transition: all 0.5s;
-      border-top: 2px solid transparent;
 
       a {
         color: gray;
       }
 
       &:hover, &.active {
-        border-top-color: #1890ff;
         a {
-          color: #1890ff;
+          color: #5079d9;
         }
       }
     }
