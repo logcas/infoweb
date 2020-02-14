@@ -1,42 +1,15 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
+import { fetchNews } from '@/api';
 
 Vue.use(Vuex);
-
-function fetchNewsFromServer(type, page) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const data = [{
-          url: 'http://www.baidu.com',
-          title: 'fsafsamfsmdklfmskldmfklakl'
-        },
-        {
-          url: 'http://www.baidu.com',
-          title: 'fsafsamfsmdklfmskldmfklakl'
-        }, {
-          url: 'http://www.baidu.com',
-          title: 'fsafsamfsmdklfmskldmfklakl'
-        }, {
-          url: 'http://www.baidu.com',
-          title: 'fsafsamfsmdklfmskldmfklakl'
-        }, {
-          url: 'http://www.baidu.com',
-          title: 'fsafsamfsmdklfmskldmfklakl'
-        }, {
-          url: 'http://www.baidu.com',
-          title: 'fsafsamfsmdklfmskldmfklakl'
-        },
-      ];
-      resolve(data);
-    })
-  });
-}
 
 export function createStore() {
   return new Vuex.Store({
     state: {
       type: 0,
       page: 0,
+      hasMore: true,
       newsList: []
     },
     actions: {
@@ -44,10 +17,14 @@ export function createStore() {
         commit,
         state
       }) {
-        return fetchNewsFromServer(state.type, state.page).then(data => {
+        return fetchNews(state.type, state.page).then(res => {
+          res = res.data;
           commit('setNews', {
-            news: data
+            news: res.data,
+            hasMore: res.hasMore
           });
+        }).catch(err => {
+          console.log(err);
         });
       }
     },
@@ -63,9 +40,11 @@ export function createStore() {
         state.page = page;
       },
       setNews(state, {
-        news
+        news,
+        hasMore
       }) {
         state.newsList = news;
+        state.hasMore = hasMore;
       }
     }
   });

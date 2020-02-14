@@ -22,10 +22,12 @@ export default context => {
       }
 
       Promise.all(matchedComponents.map(Component => {
-        Component.asyncData && Component.asyncData({
-          store,
-          route: router.currentRoute
-        });
+        if (Component.asyncData) {
+          return Component.asyncData({
+            store,
+            route: router.currentRoute
+          });
+        }
       })).then(() => {
         context.state = store.state;
         resolve(app);

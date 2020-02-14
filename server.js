@@ -48,9 +48,9 @@ app.use(Static('./dist'));
 
 app.use(async (ctx, next) => {
   if (isProd) {
-    await ready();
     await render(ctx);
   } else {
+    await ready;
     await render(ctx);
   }
 });
