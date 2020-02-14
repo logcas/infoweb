@@ -14,7 +14,7 @@
         <a :href="news.url" class="news-item_title" target="_blank">{{
           news.title
         }}</a>
-        <p class="news-item_time">收录时间：{{ news.inserted }}</p>
+        <p class="news-item_time">收录时间：{{ news.inserted | formatDate }}</p>
       </li>
     </ul>
     <div class="pagination">
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { formatDate } from '@/filters/date';
 export default {
   asyncData({ store, route }) {
     store.commit("setSearchCondition", {
@@ -32,6 +33,9 @@ export default {
       page: route.query.page
     });
     return store.dispatch("fetchNews");
+  },
+  filters: {
+    formatDate
   },
   computed: {
     newsList() {
