@@ -3,8 +3,8 @@
     <div class="center-container">
       <div class="page-name">NewsSpider</div>
       <ul class="page-nav">
-        <li class="page-nav_item active"><router-link to="/">看新闻</router-link></li>
-        <li class="page-nav_item">
+        <li class="page-nav_item" :class="{ active: current === 'news' }"><router-link to="/">看新闻</router-link></li>
+        <li class="page-nav_item" :class="{ active: current === 'about' }">
           <router-link to="/about">关于本站</router-link>
         </li>
       </ul>
@@ -14,12 +14,17 @@
 
 <script>
 export default {
+  watch: {
+    $route(to, from) {
+      this.current = to.name;
+    }
+  },
   data() {
     return {
-      current: "news"
+      current: this.$router.currentRoute.name
     };
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

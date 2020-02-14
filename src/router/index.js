@@ -9,19 +9,17 @@ export function createRouter() {
     routes: [
       {
         component: () => import('@/views/News'),
-        path: '/'
+        path: '/',
+        name: 'news'
       },
       {
         component: () => import('@/views/About'),
-        path: '/about'
+        path: '/about',
+        name: 'about'
       },
       {
         path: '/news',
         redirect: '/'
-      },
-      {
-        path: '*',
-        component: () => import('@/views/NotFound'),
       }
     ]
   });
