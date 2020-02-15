@@ -23,11 +23,7 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use: ['vue-style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(gif|jpe?g|png|webp)$/,

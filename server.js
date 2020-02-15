@@ -4,7 +4,7 @@ const {
   createBundleRenderer
 } = require('vue-server-renderer');
 const createDevServer = require('./build/dev-server');
-const template = require('fs').readFileSync('./index.html', 'utf-8');
+const template = require('fs').readFileSync('./templates/index.html', 'utf-8');
 const isProd = process.env.NODE_ENV === 'production';
 
 let renderer;
@@ -12,9 +12,9 @@ let ready;
 const app = new Koa();
 
 if (isProd) {
-  renderer = createBundleRenderer(require('./dist/vue-ssr-server-bundle.json'), {
+  renderer = createBundleRenderer(require('./dist/vue-ssr-server-bundle.json.js'), {
     template,
-    clientManifest: require('./dist/vue-ssr-client-manifest.json'),
+    clientManifest: require('./dist/vue-ssr-client-manifest.json.js'),
     runInNewContext: false
   });
 } else {
