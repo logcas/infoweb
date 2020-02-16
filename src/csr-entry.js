@@ -1,19 +1,11 @@
 import Vue from 'vue';
 import App from './App.vue';
-import {
-  createRouter
-} from '@/router';
-import {
-  createStore
-} from '@/store';
-import 'normalize.css';
-import '@/assets/style/basic.css';
+import { createStore } from './store';
+import { createRouter } from './router';
 
 Vue.mixin({
-  beforeMount() {
-    const {
-      asyncData
-    } = this.$options
+  beforeMount () {
+    const { asyncData } = this.$options
     if (asyncData) {
       // 将获取数据操作分配给 promise
       // 以便在组件中，我们可以在数据准备就绪后
@@ -27,10 +19,8 @@ Vue.mixin({
 });
 
 Vue.mixin({
-  beforeRouteUpdate(to, from, next) {
-    const {
-      asyncData
-    } = this.$options
+  beforeRouteUpdate (to, from, next) {
+    const { asyncData } = this.$options
     if (asyncData) {
       asyncData({
         store: this.$store,
@@ -42,10 +32,11 @@ Vue.mixin({
   }
 })
 
-const router = createRouter();
 const store = createStore();
+const router = createRouter('hash');
+
 new Vue({
-  router,
+  render: h => h(App),
   store,
-  render: h => h(App)
+  router
 }).$mount('#app');

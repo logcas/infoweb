@@ -10,6 +10,8 @@ export default context => {
       store
     } = createApp();
 
+    console.log(context.url);
+
     router.push(context.url);
 
     router.onReady(() => {

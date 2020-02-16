@@ -3,9 +3,9 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-export function createRouter() {
+export function createRouter(mode = 'history') {
   return new Router({
-    mode: 'history',
+    mode,
     routes: [
       {
         component: () => import('@/views/News'),
