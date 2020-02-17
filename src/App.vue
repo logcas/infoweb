@@ -12,13 +12,13 @@ import PageFooter from '@/components/PageFooter.vue';
   export default {
     components: {
       PageHeader,
-      PageFooter
+      PageFooter,
     },
     data() {
       return {
         current: ['mail'],
       };
-    },
+    }
   };
 </script>
 
