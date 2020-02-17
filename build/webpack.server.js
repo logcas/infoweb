@@ -9,6 +9,12 @@ module.exports = merge(baseConfig, {
   output: {
     libraryTarget: 'commonjs2'
   },
+  module: {
+    rules: [{
+      test: /\.s?css$/,
+      use: 'null-loader'
+    }, ]
+  },
   externals: nodeExternals({
     // 不要外置化 webpack 需要处理的依赖模块。
     // 你可以在这里添加更多的文件类型。例如，未处理 *.vue 原始文件，

@@ -8,7 +8,7 @@ module.exports = {
     false : '#cheap-module-source-map',
   output: {
     path: path.resolve(__dirname, '..', 'dist'),
-    filename: '[name].[chunkhash].js',
+    filename: '[name].[chunkhash:8].js',
     publicPath: '/'
   },
   module: {
@@ -20,10 +20,6 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
-      },
-      {
-        test: /\.s?css$/,
-        use: ['vue-style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(gif|jpe?g|png|webp)$/,
