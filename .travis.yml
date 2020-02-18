@@ -1,6 +1,9 @@
 language: node_js
 node_js:
 - "12"
+script:
+- npm run build:client
+- npm run build:server
 after_success:
 - scp -o StrictHostKeyChecking=no -r ./dist/* $REMOTE_HOST:~/web/infoweb/dist
 - ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'cd ~/web/infoweb && git pull && pm2 restart ecosystem.config.js
