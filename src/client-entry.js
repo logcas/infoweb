@@ -30,7 +30,7 @@ Vue.mixin({
       next()
     }
   }
-})
+});
 
 const {
   app,
@@ -38,11 +38,30 @@ const {
   store
 } = createApp();
 
+window.isSSR = false;
+
 if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__);
+  window.isSSR = true;
 }
 
 router.onReady(() => {
+
+  /**
+   * 当客户端渲染时 router.beforeResolve 才刚刚监听，并不会发生回调，需要手动调用 asyncData
+   */
+  if (!window.isSSR) {
+    progress.start();
+    const Components = router.getMatchedComponents();
+    Promise.all(Components.map(Component => Component.asyncData && Component.asyncData({
+      store,
+      route: router.currentRoute
+    }))).then(() => {
+      progress.finish();
+    }).catch(() => {
+      progress.fail();
+    });
+  }
 
   router.beforeResolve((to, from, next) => {
     const matched = router.getMatchedComponents(to);
@@ -55,9 +74,11 @@ router.onReady(() => {
     if (!asyncDataHooks.length) {
       return next();
     }
-
     progress.start();
-    Promise.all(asyncDataHooks.map(hook => hook({store, route: to})))
+    Promise.all(asyncDataHooks.map(hook => hook({
+        store,
+        route: to
+      })))
       .then(() => {
         progress.finish();
         next();
@@ -65,7 +86,7 @@ router.onReady(() => {
         progress.fail();
         next();
       });
-  })
+  });
 
-  app.$mount('#app');
+  window.isSSR ? app.$mount('#app') : app.$mount('#de-app');
 });
