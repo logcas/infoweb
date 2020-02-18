@@ -59,7 +59,7 @@ module.exports = merge(baseConfig, {
         {
           module: 'vuex',
           entry: {
-            path: 'http://static-cdn.lxzmww.xyz/vue@2.6.11.js',
+            path: 'http://static-cdn.lxzmww.xyz/vuex@3.1.2.js',
             type: 'js'
           },
           global: 'Vuex'
