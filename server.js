@@ -15,12 +15,13 @@ let ready;
 const app = new Koa();
 
 if (isProd) {
-  template.ssr = require('fs').readFileSync('./dist/index.ssr.html', 'utf-8');
+  template.ssr = require('fs').readFileSync('./templates/index.ssr.html', 'utf-8');
   template.csr = require('fs').readFileSync('./dist/index.csr.html');
   renderer = createBundleRenderer(require('./dist/vue-ssr-server-bundle.json'), {
     template: template.ssr,
     clientManifest: require('./dist/vue-ssr-client-manifest.json'),
-    runInNewContext: false
+    runInNewContext: false,
+    inject: false
   });
 } else {
   ready = createDevServer(app, (bundle, clientManifest, { ssr, csr }) => {
@@ -29,7 +30,7 @@ if (isProd) {
     renderer = createBundleRenderer(bundle, {
       clientManifest,
       template: template.ssr,
-      runInNewContext: false
+      runInNewContext: false,
     });
   });
 }

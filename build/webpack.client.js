@@ -25,14 +25,14 @@ module.exports = merge(baseConfig, {
     // 此插件在输出目录中
     // 生成 `vue-ssr-client-manifest.json`。
     new VueSSRClientPlugin(),
-    new HtmlWebpackPlugin({
-      filename: 'index.ssr.html',
-      template: './templates/index.html',
-      chunks: []
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.ssr.html',
+    //   template: './templates/index.html',
+    //   chunks: []
+    // }),
     new HtmlWebpackPlugin({
       filename: 'index.csr.html',
-      template: './templates/index.html'
+      template: './templates/index.csr.html'
     })
   ].concat(isProd ? [
     new MiniCssExtractPlugin({

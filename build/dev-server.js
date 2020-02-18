@@ -32,7 +32,7 @@ module.exports = function createDevServer(app, cb) {
       clientManifest = JSON.parse(
         devMiddleware.fileSystem.readFileSync('/vue-ssr-client-manifest.json', 'utf-8')
       );
-      ssrTemplate = devMiddleware.fileSystem.readFileSync('/index.ssr.html', 'utf-8');
+      ssrTemplate = require('fs').readFileSync('./templates/index.ssr.dev.html', 'utf-8');
       csrTemplate = devMiddleware.fileSystem.readFileSync('/index.csr.html');
       console.log('manifest build');
       update();
