@@ -1,0 +1,5 @@
+language: node_js
+after_success:
+- ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'cd ~/services/infoweb && git pull && npm install  && pm2 restart ecosystem.config.js --env production'
+before_install:
+- chmod 600 ~/.ssh/id_rsa

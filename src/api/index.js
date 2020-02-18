@@ -1,7 +1,13 @@
 import axios from 'axios';
 
+const isProd = process.env.NODE_ENV === 'production';
+const baseUrl = isProd ? 'http://services.lxzmww.xyz/news' : 'http://localhost:4001/';
+const fetch = axios.create({
+  baseURL
+});
+
 export function fetchNews(type, page) {
-  return axios.get('http://localhost:4001/api/news', {
+  return fetch.get('/api/get', {
     params: {
       page,
       type
