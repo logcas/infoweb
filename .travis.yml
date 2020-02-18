@@ -1,5 +1,9 @@
 language: node_js
 after_success:
-- ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'cd ~/web/infoweb && git pull && npm install && npm run build:client && npm run build:server && pm2 restart ecosystem.config.js --env production'
+- ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'cd ~/web/infoweb && git pull && npm
+  install && npm run build:client && npm run build:server && pm2 restart ecosystem.config.js
+  --env production'
 before_install:
+- openssl aes-256-cbc -K $encrypted_e817fc780519_key -iv $encrypted_e817fc780519_iv
+  -in id_rsa.enc -out ~\/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
