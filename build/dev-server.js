@@ -1,21 +1,24 @@
 const clientConfig = require('./webpack.client');
 const serverConfig = require('./webpack.server');
 const webpack = require('webpack');
-const path = require('path');
-const fs = require('fs');
 const MFS = require('memory-fs');
 
 module.exports = function createDevServer(app, cb) {
   let ready;
   let bundle;
   let clientManifest;
+  let ssrTemplate;
+  let csrTemplate;
 
   const readyPromise = new Promise(resolve => ready = resolve);
 
   const update = () => {
     if (bundle && clientManifest) {
       ready();
-      cb(bundle, clientManifest);
+      cb(bundle, clientManifest, {
+        ssr: ssrTemplate,
+        csr: csrTemplate
+      });
     }
   }
 
@@ -29,6 +32,8 @@ module.exports = function createDevServer(app, cb) {
       clientManifest = JSON.parse(
         devMiddleware.fileSystem.readFileSync('/vue-ssr-client-manifest.json', 'utf-8')
       );
+      ssrTemplate = devMiddleware.fileSystem.readFileSync('/index.ssr.html', 'utf-8');
+      csrTemplate = devMiddleware.fileSystem.readFileSync('/index.csr.html');
       console.log('manifest build');
       update();
     });

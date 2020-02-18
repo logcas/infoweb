@@ -4,25 +4,31 @@ const {
   createBundleRenderer
 } = require('vue-server-renderer');
 const createDevServer = require('./build/dev-server');
-const template = require('fs').readFileSync('./dist/index.ssr.html', 'utf-8');
 const isProd = process.env.NODE_ENV === 'production';
-const csrFiles = require('fs').readFileSync('./dist/index.csr.html');
 
+const template = {
+  ssr: null,
+  csr: null
+};
 let renderer;
 let ready;
 const app = new Koa();
 
 if (isProd) {
+  template.ssr = require('fs').readFileSync('./dist/index.ssr.html', 'utf-8');
+  template.csr = require('fs').readFileSync('./dist/index.csr.html');
   renderer = createBundleRenderer(require('./dist/vue-ssr-server-bundle.json'), {
-    template,
+    template: template.ssr,
     clientManifest: require('./dist/vue-ssr-client-manifest.json'),
     runInNewContext: false
   });
 } else {
-  ready = createDevServer(app, (bundle, clientManifest) => {
+  ready = createDevServer(app, (bundle, clientManifest, { ssr, csr }) => {
+    template.ssr = ssr;
+    template.csr = csr;
     renderer = createBundleRenderer(bundle, {
       clientManifest,
-      template,
+      template: template.ssr,
       runInNewContext: false
     });
   });
@@ -40,7 +46,7 @@ async function render(ctx) {
       ctx.body = '404 Not found';
     } else {
       ctx.type = 'text/html';
-      ctx.body = csrFiles;
+      ctx.body = template.csr;
     }
   }
 }

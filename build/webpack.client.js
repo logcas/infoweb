@@ -43,7 +43,7 @@ module.exports = merge(baseConfig, {
         {
           module: 'vue',
           entry: {
-            path: 'https://cdn.jsdelivr.net/npm/vue@2.6.11',
+            path: 'http://static-cdn.lxzmww.xyz/vue@2.6.11.js',
             type: 'js'
           },
           global: 'Vue'
@@ -51,7 +51,7 @@ module.exports = merge(baseConfig, {
         {
           module: 'vue-router',
           entry: {
-            path: 'https://unpkg.com/vue-router@3.1.5/dist/vue-router.js',
+            path: 'http://static-cdn.lxzmww.xyz/vue-router@3.1.5.js',
             type: 'js'
           },
           global: 'VueRouter'
@@ -59,7 +59,7 @@ module.exports = merge(baseConfig, {
         {
           module: 'vuex',
           entry: {
-            path: 'https://unpkg.com/vuex@3.1.2',
+            path: 'http://static-cdn.lxzmww.xyz/vue@2.6.11.js',
             type: 'js'
           },
           global: 'Vuex'
