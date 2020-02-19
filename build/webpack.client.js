@@ -5,6 +5,8 @@ const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
+const StaticUploadPlugin = require('static-upload-plugin');
+
 const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = merge(baseConfig, {
@@ -65,6 +67,16 @@ module.exports = merge(baseConfig, {
           global: 'Vuex'
         }
       ]
+    }),
+    new StaticUploadPlugin({
+      provider: 'qiniu',
+      config: {
+        accessKey: 'QIPytRNK0T-cwaoI429Itnd9yKBXO-T25L-UtUBf',
+        secretKey: 'ays-QtaDtKKpHCx-71LpzMWe7Hvkn_YYzDjNkiTq',
+        bucket: 'lucaspic'
+      },
+      path: '/app/news/',
+      include: /\.(js|css)$/
     })
   ] : [])
 });
