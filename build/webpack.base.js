@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '..', 'dist'),
     filename: '[name].[chunkhash:8].js',
-    publicPath: 'http://static-cdn.lxzmww.xyz/app/news/'
+    publicPath: isProd ? 'http://static-cdn.lxzmww.xyz/app/news/' : '/'
   },
   module: {
     rules: [{

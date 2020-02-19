@@ -21,6 +21,12 @@ export function createRouter(mode = 'history') {
         path: '/news',
         redirect: '/'
       }
-    ]
+    ],
+    scrollBehavior() {
+      return {
+        x: 0,
+        y: 0
+      };
+    }
   });
 }
